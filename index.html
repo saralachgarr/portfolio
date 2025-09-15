@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Portfolio de Sara Lachgar - Développeuse Full Stack spécialisée en Laravel, React et PHP. Découvrez mes projets et compétences.">
+
+  <title>Sara Lachgar - Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    /* ===== VARIABLES & RESET ===== */
+    :root {
+      --primary: #6C63FF;
+      --secondary: #FF6584;
+      --dark: #2D2B55;
+      --light: #F8F9FA;
+      --gray: #6C757D;
+      --light-gray: #E9ECEF;
+      --success: #28A745;
+      --white: #FFFFFF;
+      --black: #212529;
+      
+      --font-primary: 'Montserrat', sans-serif;
+      --font-heading: 'Playfair Display', serif;
+      
+      --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --shadow-hover: 0 10px 15px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-primary);
+      color: var(--black);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 60px;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--primary);
+      border-radius: 2px;
+    }
+
+    .dark-section {
+      background-color: var(--dark);
+      color: var(--white);
+    }
+
+    /* ===== NAVBAR ===== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      padding: 15px 0;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      transition: var(--transition);
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-img {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    .logo-text {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--dark);
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 500;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .nav-links a:not(.btn-outline):hover {
+      color: var(--primary);
+    }
+
+    .nav-links a:not(.btn-outline)::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--primary);
+      transition: var(--transition);
+    }
+
+    .nav-links a:not(.btn-outline):hover::after {
+      width: 100%;
+    }
+
+    .btn-outline {
+      padding: 8px 20px;
+      border: 2px solid var(--primary);
+      border-radius: 30px;
+      color: var(--primary);
+      transition: var(--transition);
+    }
+
+    .btn-outline:hover {
+      background-color: var(--primary);
+      color: var(--white);
+    }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .bar {
+      width: 25px;
+      height: 3px;
+      background-color: var(--dark);
+      margin: 3px 0;
+      transition: var(--transition);
+    }
+
+    /* ===== HERO SECTION ===== */
+    .hero-header {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      padding-top: 80px;
+      overflow: hidden;
+    }
+
+    .hero-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    .hero-shape-1 {
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 500px;
+      height: 500px;
+      background: rgba(108, 99, 255, 0.1);
+      border-radius: 50%;
+    }
+
+    .hero-shape-2 {
+      position: absolute;
+      bottom: -100px;
+      left: -100px;
+      width: 400px;
+      height: 400px;
+      background: rgba(255, 101, 132, 0.1);
+      border-radius: 50%;
+    }
+
+    .hero-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex: 1;
+      gap: 40px;
+    }
+
+    .hero-text {
+      flex: 1;
+      max-width: 600px;
+    }
+
+    .hero-text h4 {
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 15px;
+      font-size: 1.2rem;
+    }
+
+    .hero-text h1 {
+      font-family: var(--font-heading);
+      font-size: 3.5rem;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .text-highlight {
+      color: var(--primary);
+      position: relative;
+      display: inline-block;
+    }
+
+    .text-highlight::after {
+      content: '';
+      position: absolute;
+      bottom: 5px;
+      left: 0;
+      width: 100%;
+      height: 10px;
+      background-color: rgba(108, 99, 255, 0.2);
+      z-index: -1;
+    }
+
+    .hero-text p {
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      color: var(--gray);
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .btn-main, .btn-secondary {
+      padding: 12px 30px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: var(--transition);
+      display: inline-block;
+    }
+
+    .btn-main {
+      background-color: var(--primary);
+      color: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .btn-main:hover {
+      background-color: #554fd2;
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--dark);
+      border: 2px solid var(--dark);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--dark);
+      color: var(--white);
+      transform: translateY(-3px);
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-icons a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background-color: var(--light);
+      color: var(--dark);
+      border-radius: 50%;
+      transition: var(--transition);
+    }
+
+    .social-icons a:hover {
+      background-color: var(--primary);
+      color: var(--white);
+      transform: translateY(-3px);
+    }
+
+    .hero-img {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .img-container {
+      width: 380px;
+      height: 380px;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: var(--shadow-hover);
+      border: 5px solid var(--white);
+      position: relative;
+    }
+
+    .img-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, rgba(108, 99, 255, 0.2), rgba(255, 101, 132, 0.2));
+      z-index: 1;
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .img-container:hover::before {
+      opacity: 1;
+    }
+
+    .hero-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .img-container:hover img {
+      transform: scale(1.05);
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: var(--gray);
+      font-size: 0.8rem;
+    }
+
+    .scroll-line {
+      width: 2px;
+      height: 40px;
+      background-color: var(--gray);
+      margin-top: 10px;
+      animation: scrollAnimation 2s infinite;
+    }
+
+    @keyframes scrollAnimation {
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+    }
+
+    /* ===== ABOUT SECTION ===== */
+    .about-content {
+      display: flex;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .about-text {
+      flex: 1;
+    }
+
+    .about-text p {
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      color: var(--gray);
+    }
+
+    .skills-container {
+      display: flex;
+      gap: 40px;
+    }
+
+    .skill-category {
+      flex: 1;
+    }
+
+    .skill-category h3 {
+      margin-bottom: 15px;
+      color: var(--dark);
+      font-size: 1.2rem;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .skill-tag {
+      background-color: var(--light);
+      color: var(--dark);
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      transition: var(--transition);
+    }
+
+    .skill-tag:hover {
+      background-color: var(--primary);
+      color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    /* ===== PORTFOLIO SECTION ===== */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .project-card {
+      background-color: var(--white);
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .project-icon {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+
+    .project-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      color: var(--dark);
+    }
+
+    .project-card p {
+      color: var(--gray);
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+
+    .technologies {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .technologies span {
+      background-color: var(--light);
+      color: var(--primary);
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 15px;
+    }
+
+    .project-link {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: var(--transition);
+    }
+
+    .project-link:hover {
+      color: var(--secondary);
+    }
+
+    /* Project Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 2000;
+      overflow: auto;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: var(--white);
+      margin: 5% auto;
+      padding: 30px;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 900px;
+      position: relative;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 1.5rem;
+      color: var(--gray);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .close-modal:hover {
+      color: var(--secondary);
+    }
+
+    .modal-header {
+      margin-bottom: 20px;
+    }
+
+    .modal-body {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .project-media {
+      width: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .project-media img, .project-media video {
+      width: 100%;
+      display: block;
+    }
+
+    /* ===== CONTACT SECTION ===== */
+    .contact-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .contact-icon {
+      width: 60px;
+      height: 60px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+
+    .contact-details h3 {
+      margin-bottom: 5px;
+      font-size: 1.2rem;
+    }
+
+    .contact-details p, .contact-details a {
+      color: var(--light-gray);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .contact-details a:hover {
+      color: var(--primary);
+    }
+
+    .whatsapp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background-color: #25D366;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      margin-top: 10px;
+      transition: var(--transition);
+    }
+
+    .whatsapp-btn:hover {
+      background-color: #128C7E;
+      transform: translateY(-2px);
+    }
+
+    .contact-form h3 {
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 5px;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: var(--white);
+      font-family: var(--font-primary);
+      transition: var(--transition);
+    }
+
+    .form-group input:focus, .form-group textarea:focus {
+      outline: none;
+      background-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    /* ===== CV SECTION ===== */
+    .cv-section {
+      text-align: center;
+      padding: 60px 0;
+      background-color: var(--light);
+    }
+
+    .cv-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .cv-download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background-color: var(--primary);
+      color: white;
+      padding: 15px 30px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      margin-top: 30px;
+      transition: var(--transition);
+    }
+
+    .cv-download-btn:hover {
+      background-color: #554fd2;
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background-color: var(--dark);
+      color: var(--light-gray);
+      padding: 30px 0;
+      text-align: center;
+    }
+
+    /* ===== RESPONSIVE DESIGN ===== */
+    @media (max-width: 992px) {
+      .hero-content {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 40px;
+      }
+      
+      .hero-text {
+        max-width: 100%;
+      }
+      
+      .hero-buttons, .social-icons {
+        justify-content: center;
+      }
+      
+      .about-content {
+        flex-direction: column;
+      }
+      
+      .contact-content {
+        grid-template-columns: 1fr;
+      }
+
+      .modal-content {
+        width: 90%;
+        padding: 20px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background-color: var(--white);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 40px;
+        transition: var(--transition);
+      }
+      
+      .nav-links.active {
+        left: 0;
+      }
+      
+      .nav-toggle {
+        display: flex;
+      }
+      
+      .nav-toggle.active .bar:nth-child(1) {
+        transform: rotate(-45deg) translate(-5px, 6px);
+      }
+      
+      .nav-toggle.active .bar:nth-child(2) {
+        opacity: 0;
+      }
+      
+      .nav-toggle.active .bar:nth-child(3) {
+        transform: rotate(45deg) translate(-5px, -6px);
+      }
+      
+      .hero-text h1 {
+        font-size: 2.5rem;
+      }
+      
+      .skills-container {
+        flex-direction: column;
+        gap: 30px;
+      }
+      
+      .img-container {
+        width: 280px;
+        height: 280px;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .section {
+        padding: 60px 0;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .img-container {
+        width: 220px;
+        height: 220px;
+      }
+
+      .project-links {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .modal-content {
+        margin: 10% auto;
+        width: 95%;
+      }
+    }
+  .cv-download-btn {
+  display: inline-block;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #4e54c8, #8f94fb);
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: 0.3s ease;
+}
+
+.cv-download-btn:hover {
+  background: linear-gradient(135deg, #8f94fb, #4e54c8);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <div class="logo-container">
+        <div class="logo-img">SL</div>
+        <div class="logo-text">Sara Lachgar</div>
+      </div>
+      <div class="nav-toggle" id="navToggle">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#about">À propos</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#cv" class="btn-outline">CV</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero-header">
+    <div class="hero-background">
+      <div class="hero-shape-1"></div>
+      <div class="hero-shape-2"></div>
+    </div>
+    <div class="container hero-content">
+      <div class="hero-text">
+        <h4>Développeuse Full Stack</h4>
+        <h1>Bonjour, je suis <span class="text-highlight">Sara Lachgar</span></h1>
+        <p>Passionnée par le développement web, j'ai conçu plusieurs projets avec des technologies comme Laravel, React, PHP natif et plus encore. Je suis prête à transformer vos idées en réalité numérique.</p>
+        <div class="hero-buttons">
+          <a href="#portfolio" class="btn-main">Voir mes projets</a>
+          <a href="#contact" class="btn-secondary">Me contacter</a>
+        </div>
+        <div class="social-icons">
+          <a href="https://github.com/yourusername" target="_blank"><i class="fab fa-github"></i></a>
+          <a href="mailto:saralachgar01@gmail.com"><i class="fas fa-envelope"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+    <div class="hero-img">
+  <div class="img-container">
+    <img src="images/sara.jpg" alt="Sara Lachgar">
+  </div>
+</div>
+
+    </div>
+    <div class="scroll-indicator">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </header>
+
+  <!-- About Section -->
+  <section id="about" class="section">
+    <div class="container">
+      <h2 class="section-title">À propos de moi</h2>
+      <div class="about-content">
+        <div class="about-text">
+          <p>Je suis développeuse full stack passionnée par la création d'expériences web innovantes et fonctionnelles. Mon expertise couvre à la fois le frontend et le backend, me permettant de réaliser des projets complets et cohérents.</p>
+          <div class="skills-container">
+            <div class="skill-category">
+              <h3>Frontend</h3>
+              <div class="skills">
+                <span class="skill-tag">HTML/CSS</span>
+                <span class="skill-tag">JavaScript</span>
+                <span class="skill-tag">React</span>
+                <span class="skill-tag">Bootstrap</span>
+              </div>
+            </div>
+            <div class="skill-category">
+              <h3>Backend</h3>
+              <div class="skills">
+                <span class="skill-tag">PHP</span>
+                <span class="skill-tag">Laravel</span>
+                <span class="skill-tag">MySQL</span>
+                <span class="skill-tag">API REST</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio Section -->
+  <section id="portfolio" class="section">
+    <div class="container">
+      <h2 class="section-title">Mes projets</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-icon">🧩</div>
+          <h3>MIAGE Casablanca – Mars 2025</h3>
+          <p>Application de gestion et vérification de diplômes & certificats.</p>
+          <div class="technologies">
+            <span>PHP natif</span>
+            <span>MySQL</span>
+            <span>Chart.js</span>
+            <span>Bootstrap</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/yourusername/miage-project" target="_blank" class="project-link">
+              <i class="fab fa-github"></i> Code source
+            </a>
+            <a href="#" class="project-link view-project" data-project="1">
+              <i class="fas fa-external-link-alt"></i> Voir le projet
+            </a>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-icon">✈️</div>
+          <h3>TravelEase – Projet de conception</h3>
+          <p>Site complet de réservation (hôtels, vols, taxis) avec filtres dynamiques.</p>
+          <div class="technologies">
+            <span>Laravel 11</span>
+            <span>React</span>
+            <span>API REST</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/yourusername/travelease" target="_blank" class="project-link">
+              <i class="fab fa-github"></i> Code source
+            </a>
+            <a href="#" class="project-link view-project" data-project="2">
+              <i class="fas fa-external-link-alt"></i> Voir le projet
+            </a>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-icon">🌐</div>
+          <h3>Site Vitrine Cabinet Partnet – Juillet 2024</h3>
+          <p>Création d'un site responsive + formulaire + envoi d'email avec PHPMailer.</p>
+          <div class="technologies">
+            <span>HTML/CSS</span>
+            <span>JavaScript</span>
+            <span>PHP</span>
+            <span>PHPMailer</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/yourusername/partnet-vitrine" target="_blank" class="project-link">
+              <i class="fab fa-github"></i> Code source
+            </a>
+            <a href="#" class="project-link view-project" data-project="3">
+              <i class="fas fa-external-link-alt"></i> Voir le projet
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Project Modals -->
+  <div id="project-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <div class="modal-header">
+        <h2 id="modal-title"></h2>
+      </div>
+      <div class="modal-body">
+        <div class="project-media">
+          <img id="modal-image" src="" alt="">
+        </div>
+        <div id="modal-description"></div>
+        <div class="technologies" id="modal-technologies"></div>
+        <div class="project-links">
+          <a id="modal-github" href="#" target="_blank" class="project-link">
+            <i class="fab fa-github"></i> Code source
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CV Section -->
+  <section id="cv" class="section cv-section">
+    <div class="container">
+      <h2 class="section-title">Mon Curriculum Vitae</h2>
+      <div class="cv-container">
+        <p>Vous pouvez télécharger mon CV pour en savoir plus sur mon parcours, mes compétences et mon expérience professionnelle.</p>
+        <a href="/Cvsara.pdf" class="cv-download-btn" download>
+          <i class="fas fa-download"></i> Télécharger mon CV
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section dark-section">
+    <div class="container">
+      <h2 class="section-title">Contact</h2>
+      <div class="contact-content">
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-phone"></i>
+            </div>
+            <div class="contact-details">
+              <h3>Téléphone</h3>
+              <p>0626496041</p>
+              <a href="https://wa.me/212626496041" target="_blank" class="whatsapp-btn">
+                <i class="fab fa-whatsapp"></i> WhatsApp
+              </a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div class="contact-details">
+              <h3>Email</h3>
+              <a href="mailto:saralachgar01@gmail.com">saralachgar01@gmail.com</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fab fa-github"></i>
+            </div>
+            <div class="contact-details">
+              <h3>GitHub</h3>
+              <a href="https://github.com/saralachgarr" target="_blank">@yourusername</a>
+            </div>
+          </div>
+        </div>
+        <div class="contact-form">
+          <h3>Envoyez-moi un message</h3>
+          <form id="messageForm">
+            <div class="form-group">
+              <input type="text" placeholder="Votre nom" required>
+            </div>
+            <div class="form-group">
+              <input type="email" placeholder="Votre email" required>
+            </div>
+            <div class="form-group">
+              <textarea placeholder="Votre message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn-main">Envoyer</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Sara Lachgar. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Navigation toggle
+      const navToggle = document.getElementById('navToggle');
+      const navLinks = document.querySelector('.nav-links');
+      
+      if (navToggle) {
+        navToggle.addEventListener('click', function() {
+          this.classList.toggle('active');
+          navLinks.classList.toggle('active');
+        });
+      }
+      
+      // Navbar scroll effect
+      const navbar = document.querySelector('.navbar');
+      
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 100) {
+          navbar.style.padding = '10px 0';
+          navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+        } else {
+          navbar.style.padding = '15px 0';
+          navbar.style.boxShadow = 'none';
+        }
+      });
+      
+      // Form submission
+      const contactForm = document.getElementById('messageForm');
+      
+      if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          // Here you would normally handle form submission with AJAX to PHP
+          alert('Merci pour votre message ! Je vous répondrai très bientôt.');
+          this.reset();
+        });
+      }
+      
+      // Project modals
+      const modal = document.getElementById('project-modal');
+      const viewProjectButtons = document.querySelectorAll('.view-project');
+      const closeModal = document.querySelector('.close-modal');
+      
+      // Project data
+      const projects = {
+        1: {
+          title: "MIAGE Casablanca – Mars 2025",
+          image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+          description: "Application complète de gestion et vérification de diplômes et certificats pour l'institut MIAGE Casablanca. Le système permet l'enregistrement, la consultation et la vérification en ligne des documents académiques.",
+          technologies: ["PHP natif", "MySQL", "Chart.js", "Bootstrap"],
+          github: "https://github.com/yourusername/miage-project"
+        },
+        2: {
+          title: "TravelEase – Projet de conception",
+          image: "https://images.unsplash.com/photo-1439066615861-d1af74d74000?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=872&q=80",
+          description: "Plateforme complète de réservation de voyages incluant hôtels, vols et services de taxi. L'application propose des filtres avancés, un système de recommandation et une interface utilisateur intuitive.",
+          technologies: ["Laravel 11", "React", "API REST"],
+          github: "https://github.com/yourusername/travelease"
+        },
+        3: {
+          title: "Site Vitrine Cabinet Partnet – Juillet 2024",
+          image: "https://images.unsplash.com/photo-146"
+        }
